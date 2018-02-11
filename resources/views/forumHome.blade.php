@@ -4,7 +4,35 @@
 	<title>Forum</title>
     </head>
     <body>
-	<p>Form for posting threads goes here!</p>
+	@if($errors->any())
+	    <div>
+		The following errors have occured:
+	    <ul>
+		@foreach($errors->all() as $error)
+		    <li>{{ $error }}</li>
+		@endforeach
+	    </ul>
+	    </div>
+	@endif
+	<div>
+	    {!! Form::open(['route' => 'forum.home.post']) !!}
+	    <div>
+		{!! Form::label('author', 'Author:') !!}
+		{!! Form::text('author', null, null) !!}
+	    </div>
+	    <div>
+		{!! Form::label('subject', 'Subject:') !!}
+		{!! Form::text('subject', null, null) !!}
+	    </div>
+	    <div>
+		{!! Form::label('content', 'Comment:') !!}
+		{!! Form::text('content', null, null) !!}
+	    </div>
+	    <div>
+		{!! Form::submit('Submit', null) !!}
+	    </div>
+	    {!! Form::close() !!}
+	</div>
 	@if(count($threads) != 0)
 	    @foreach($threads as $thread)
 		<div>

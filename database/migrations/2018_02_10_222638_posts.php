@@ -15,14 +15,15 @@ class Posts extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('author')->default('Anonymous');
+            $table->text('author');
             $table->text('content');
             $table->timestamp('created')->useCurrent();
         });
         Schema::create('threads', function (Blueprint $table){
             $table->increments('id');
-            $table->text('author')->default('Anonymous');
+            $table->text('author');
             $table->text('subject');
+            $table->text('content');
             $table->timestamp('created')->useCurrent();
         });
     }

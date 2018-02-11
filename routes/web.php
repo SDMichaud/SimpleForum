@@ -26,6 +26,7 @@ Route::get('echo', 'echoTestController@input')->name('echo.input');
 Route::post('echo', 'echoTestController@output')->name('echo.output');
 
 Route::get('/', 'forumController@home')->name('forum.home');
+Route::post('/', 'forumController@post')->name('forum.home.post');
 
 
 /* Route for testing */
