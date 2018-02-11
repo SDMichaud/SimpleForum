@@ -5,4 +5,5 @@
 /artisan
 /vendor/*
 /notes.md
+/.env
 *~
