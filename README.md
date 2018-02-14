@@ -1,4 +1,5 @@
-# Work In Progress
-This project is in the very early stages. It is mostly being produced as a way of learning the [Laravel](https://laravel.com) framework.
+# Refactoring
+This branch will hold the source code for the new application running without the Laravel framework.
 
-The idea is to produce a very simple web forum.
+# New Setup
+The project will now use PHP with the PDO extention and a mySQL database. The new setup seems to be in line with how the old setup used to run with the Laravel framework and is about 1% of the size. Manual setup of a mySQL database and modification of the relevent sections of the source code is required for those looking to get this running locally. More details to follow in later commits.
