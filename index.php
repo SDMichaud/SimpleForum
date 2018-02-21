@@ -4,7 +4,7 @@
     </head>
     <body>
 	<div>
-	    <form method="post" action="post.php" enctype="multipart/form-data">
+	    <form method="post" action="src/post.php" enctype="multipart/form-data">
 		Name: <input type="text" name="author"><br>
 		Subject: <input type="text" name="subject"><br>
 		Comment: <textarea name="content" rows="5" cols="40"></textarea><br>
@@ -14,15 +14,8 @@
 	</div>
 	<div>
 	    <?php
-	    function createPostDiv($post_data){
-		echo("<div style='border: 2px solid black; margin: 10px 0px;'>" .
-		     "<img src=/uploads/" . $post_data['photo'] . " width='128px'>" .
-		     "#" . $post_data['id'] . "<br>" .
-		     $post_data['author'] . " " . $post_data['subject'] . " Posted: " . $post_data['updated'] . "<br>" .
-		     $post_data['content'] . "<br>" .
-		     "<a href='/reply/" . $post_data['id'] . "'>Reply</a>" .
-		     "</div>");
-	    }
+	    require_once('src/classes/PostClass.php');
+	    
 	    $servername = "localhost";
 	    $username = "phpuser";
 	    $password = "phpuserpass";
@@ -37,7 +30,7 @@
 
 		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		foreach ($rows as $row) {
-		    createPostDiv($row);
+		   echo(PostClass::createPostDivHTML($row));
 		}
 	    }
 	    catch(PDOException $e)
