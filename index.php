@@ -4,7 +4,7 @@
     </head>
     <body>
 	<div>
-	    <form method="post" action="post.php" enctype="multipart/form-data">
+	    <form method="post" action="src/post.php" enctype="multipart/form-data">
 		Name: <input type="text" name="author"><br>
 		Subject: <input type="text" name="subject"><br>
 		Comment: <textarea name="content" rows="5" cols="40"></textarea><br>

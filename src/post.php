@@ -11,7 +11,7 @@
 	</script>
 	<?php
 	function handle_photo(){
-	    $target_dir = "uploads/";
+	    $target_dir = "../uploads/";
 	    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
 	    $final_target = $targest_dir . basename($_FILES["photo"]["tmp_name"]);
 	    $uploadOK = 1;
