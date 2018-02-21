@@ -13,7 +13,6 @@
 	function handle_photo(){
 	    $target_dir = "../uploads/";
 	    $target_file = $target_dir . basename($_FILES["photo"]["name"]);
-	    $final_target = $targest_dir . basename($_FILES["photo"]["tmp_name"]);
 	    $uploadOK = 1;
 	    $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 	    if( !is_uploaded_file($_FILES["photo"]["tmp_name"])){
@@ -28,7 +27,6 @@
 	    if($imageFileType != "jpg" && $imageFileType != "jpeg" && $imageFileType != "png" && $imageFileType != "gif"){
 		die("Only JPG, JPEG, PNG, and GIF files supported.");
 	    }
-	    $temp = explode(".", $_FILES["file"]["name"]);
 	    $newfilename = round(microtime(true)) . '.' . $imageFileType;
 	    if(move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir . $newfilename)){
 		echo("The file " . basename($_FILES["photo"]["name"]) . " has been uploaded.");
