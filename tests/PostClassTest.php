@@ -1,6 +1,6 @@
 <?php
 use PHPUnit\Framework\TestCase;
-require_once('/home/nerd/programing/SimpleForum/src/classes/PostClass.php');
+require_once(__DIR__ . '/../src/classes/PostClass.php');
 
 class PostClassTest extends TestCase
 {
