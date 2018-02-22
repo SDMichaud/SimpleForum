@@ -15,27 +15,20 @@
 	<div>
 	    <?php
 	    require_once('src/classes/PostClass.php');
+	    require_once('src/classes/DBFunctionsClass.php');
+
+	    $DBIniFilePath = (__DIR__ . '/src/');
+	    $DBIniFile = ($DBIniFilePath . 'DBSettings.ini');
+	    $DBWorker = new DBFunctionsClass($DBIniFile);
 	    
-	    $servername = "localhost";
-	    $username = "phpuser";
-	    $password = "phpuserpass";
-	    $dbname = "sfdb";
-	    $tablename = "posts";
-
-	    try {
-		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$stmt = $conn->prepare("SELECT * FROM $tablename WHERE is_op=1 ORDER BY updated DESC");
-		$stmt->execute();
-
-		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($rows as $row) {
-		   echo(PostClass::createPostDivHTML($row));
-		}
-	    }
-	    catch(PDOException $e)
+	    if($DBWorker->openConnection())
 	    {
-		echo "Connection failed: " . $e->getMessage();
+		$OPs = $DBWorker->getAllOP();
+		$DBWorker->closeConnection();
+		foreach ($OPs as $OP)
+		{
+		    echo(PostClass::createPostDivHTML($OP));
+		}
 	    }
 	    ?>
 	</div>
