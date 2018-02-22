@@ -1,3 +1,21 @@
 language: php
+
 php:
-- '7.1'
+  - '7.1'
+
+dist: trusty
+sudo: required
+
+services:
+  - mysql
+
+before_script:
+  - mysql -u root --password="" --execute="CREATE DATABASE IF NOT EXISTS sfdb"
+  - echo -e "[client]\nuser=root\ndatabase=sfdb\nhost=localhost" | sudo tee -a /etc/mysql/my.cnf
+  - echo -e "[database]\ndriver=mysql\nservername=localhost\ndbname=sfdb\ntablename=posts\nusername=root\npassword=" | tee $TRAVIS_BUILD_DIR/src/DBSettings.ini
+  - sudo service mysql restart
+  - ./tests/scripts/sfdbSetup.sh -rs
+
+  
+notifications:
+  email: false
