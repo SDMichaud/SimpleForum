@@ -9,9 +9,13 @@ class DBFunctionsClass
     private $tablename;
     private $connection;
 
-    public function __construct($dbIniFile)
+    public function __construct()
     {
-	$dbSettingsArr = $this->parseDBIni($dbIniFile);
+	// Load settings from ini file
+	$DBIniFilePath = (__DIR__ . "/../");
+	$DBIniFile = $DBIniFilePath . "DBSettings.ini";
+	
+	$dbSettingsArr = $this->parseDBIni($DBIniFile);
 	$this->driver = $dbSettingsArr['driver'];
 	$this->servername = $dbSettingsArr['servername'];
 	$this->username = $dbSettingsArr['username'];
@@ -49,6 +53,19 @@ class DBFunctionsClass
 	$stmt = $this->connection->prepare($SQL);
 	$stmt->execute();
 	return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function insertOP($author, $subject, $content, $photo)
+    {
+	$SQL = "INSERT INTO {$this->tablename} (author, subject, content, photo, is_op) VALUES (:author, :subject, :content, :photo, :is_op)";
+	$stmt = $this->connection->prepare($SQL);
+	$stmt->execute( array(
+	    ':author' => $author,
+	    ':subject' => $subject,
+	    ':content' => $content,
+	    ':photo' => $photo,
+	    ':is_op' => 1
+	    ));
     }
 }
 ?>

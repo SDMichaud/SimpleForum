@@ -4,7 +4,7 @@
     </head>
     <body>
 	<div>
-	    <form method="post" action="src/post.php" enctype="multipart/form-data">
+	    <form method="post" action="src/postSubmit.php" enctype="multipart/form-data">
 		Name: <input type="text" name="author"><br>
 		Subject: <input type="text" name="subject"><br>
 		Comment: <textarea name="content" rows="5" cols="40"></textarea><br>
@@ -17,9 +17,7 @@
 	    require_once('src/classes/PostClass.php');
 	    require_once('src/classes/DBFunctionsClass.php');
 
-	    $DBIniFilePath = (__DIR__ . '/src/');
-	    $DBIniFile = ($DBIniFilePath . 'DBSettings.ini');
-	    $DBWorker = new DBFunctionsClass($DBIniFile);
+	    $DBWorker = new DBFunctionsClass();
 	    
 	    if($DBWorker->openConnection())
 	    {
@@ -29,6 +27,10 @@
 		{
 		    echo(PostClass::createPostDivHTML($OP));
 		}
+	    }
+	    else
+	    {
+		echo("<br><br>MySQL Connection Error");
 	    }
 	    ?>
 	</div>
